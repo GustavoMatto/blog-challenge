@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: desafiobis2bis
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
