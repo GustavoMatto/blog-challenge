@@ -1,19 +1,20 @@
 <?php
-$servername = "db";
-$username = "admin";
-$password = "root";
-$dbname = "desafiobis2bis";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if ($conn->connect_error) {
-    die("Falha na conexão ao MySQL: " . $conn->connect_error);
-} else {
-    echo "Conexão ao MySQL bem-sucedida!";
-}
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$conn->close();
+use Desafiobis2bis\App\Controller\Router;
+use Desafiobis2bis\App\Controller\DefaultController;
+use Desafiobis2bis\App\Controller\RouteDefinition\DefaultRouteDefinition; 
+use Desafiobis2bis\App\View\DefaultView;
+use Desafiobis2bis\App\Model\User;
+use Desafiobis2bis\App\Model\Config\Database;
 
-phpinfo();
+$router = new Router(
+    new DefaultController(new DefaultView()),
+    new DefaultRouteDefinition(), new DefaultView()
+);
 
-?>
+$router->getRoute();
